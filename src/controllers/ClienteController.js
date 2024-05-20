@@ -54,13 +54,15 @@ class ClienteController {
   }
 
   // DELETE
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const { id } = req.params;
       await ClienteService.deletarCliente(id);
       return res.json("Cliente deletado com sucesso!");
     } catch (e) {
       return res.status(404).json({ error: "Cliente não encontrado" });
+    } finally {
+      next();
     }
   }
 }

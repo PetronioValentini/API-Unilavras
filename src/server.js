@@ -1,4 +1,4 @@
 import app from "./app";
+import { portapi } from "./configs/database";
 
-const port = 2555;
-app.listen(port);
+app.listen(portapi);

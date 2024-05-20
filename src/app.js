@@ -6,12 +6,15 @@ import "./database";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import NodeCache from "node-cache";
 import clienteRoutes from "./routes/clienteRoutes";
 import produtoRoutes from "./routes/produtoRoutes";
+import { cacheMiddleware } from "./middlewares/cacheMiddleware";
 
 class App {
   constructor() {
     this.app = express();
+    this.cache = new NodeCache({ stdTTL: 30, checkperiod: 60 });
     this.middlewares();
     this.routes();
   }
@@ -21,6 +24,7 @@ class App {
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
+    this.app.use(cacheMiddleware);
   }
 
   routes() {

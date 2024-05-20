@@ -23,17 +23,13 @@ class ClienteService {
   }
 
   async atualizarCliente(id, dadosAtualizados) {
-    try {
-      const cliente = await Cliente.findByPk(id);
-      if (!cliente) {
-        throw new Error("Cliente não encontrado");
-      }
-      // Atualizando o cliente com os novos dados
-      await cliente.update(dadosAtualizados);
-      return cliente;
-    } catch (e) {
-      throw new Error(e.message);
+    const cliente = await Cliente.findByPk(id);
+    if (!cliente) {
+      throw new Error("Cliente não encontrado");
     }
+    // Atualizando o cliente com os novos dados
+    await cliente.update(dadosAtualizados);
+    return cliente;
   }
 
   async deletarCliente(id) {
