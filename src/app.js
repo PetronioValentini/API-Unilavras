@@ -9,6 +9,8 @@ import helmet from "helmet";
 import NodeCache from "node-cache";
 import clienteRoutes from "./routes/clienteRoutes";
 import produtoRoutes from "./routes/produtoRoutes";
+import usuarioRoutes from "./routes/usuarioRoutes";
+import tokenRoutes from "./routes/tokenRoutes";
 import { cacheMiddleware } from "./middlewares/cacheMiddleware";
 
 class App {
@@ -30,6 +32,8 @@ class App {
   routes() {
     this.app.use("/clientes/", clienteRoutes);
     this.app.use("/produtos/", produtoRoutes);
+    this.app.use("/usuarios/", usuarioRoutes);
+    this.app.use("/tokens/", tokenRoutes);
   }
 }
 

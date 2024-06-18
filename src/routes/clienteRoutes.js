@@ -4,13 +4,14 @@ import verificarSenha from "../middlewares/tokenMiddleware";
 import {
   cacheHandler, cacheHandlerAll, clearCache, clearCacheAll,
 } from "../middlewares/cacheMiddleware";
+import login from "../middlewares/loginMuddleware";
 
 const router = new Router();
 
-router.post("/", clearCacheAll("cliente"), verificarSenha, ClienteController.store);
-router.get("/", cacheHandlerAll("cliente"), ClienteController.index);
-router.get("/:id", cacheHandler("cliente"), ClienteController.show);
-router.put("/:id", clearCache("cliente"), verificarSenha, ClienteController.update);
-router.delete("/:id", verificarSenha, ClienteController.delete, clearCache("cliente"));
+router.post("/", login, clearCacheAll("cliente"), verificarSenha, ClienteController.store);
+router.get("/", login, cacheHandlerAll("cliente"), ClienteController.index);
+router.get("/:id", login, cacheHandler("cliente"), ClienteController.show);
+router.put("/:id", login, clearCache("cliente"), verificarSenha, ClienteController.update);
+router.delete("/:id", login, verificarSenha, ClienteController.delete, clearCache("cliente"));
 
 export default router;

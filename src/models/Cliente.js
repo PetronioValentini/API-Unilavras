@@ -41,6 +41,14 @@ export default class Cliente extends Model {
             notEmpty: {
               msg: "Campo idade não pode estar vazio",
             },
+            min: {
+              args: [0],
+              msg: "Idade deve ser um numero positivo",
+            },
+            max: {
+              args: [120],
+              msg: "Idade deve ser menor que 120",
+            },
           },
         },
       },

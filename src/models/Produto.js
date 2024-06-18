@@ -32,6 +32,10 @@ export default class Produto extends Model {
             notEmpty: {
               msg: "Campo preco não pode estar vazio",
             },
+            min: {
+              args: [0],
+              msg: "Preco precisa ser positivo",
+            },
           },
         },
       },
