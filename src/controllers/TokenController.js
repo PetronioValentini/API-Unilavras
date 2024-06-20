@@ -34,7 +34,7 @@ class TokenController {
     user.token = token;
     await user.save();
 
-    return res.json({ token });
+    return res.json({ token, user: { usuario: user.usuario, id } });
   }
 }
 
