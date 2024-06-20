@@ -1,4 +1,3 @@
-// import Cliente from "../models/Cliente";
 import ClienteService from "../services/ClienteService";
 
 class ClienteController {
@@ -6,7 +5,7 @@ class ClienteController {
   async store(req, res) {
     try {
       const novoCliente = await ClienteService.criarCliente(req.body);
-      return res.json(novoCliente);
+      return res.status(201).json(novoCliente);
     } catch (e) {
       const errors = e.message.split("\n");
       return res.status(400).json({ errors });
@@ -58,9 +57,9 @@ class ClienteController {
     try {
       const { id } = req.params;
       await ClienteService.deletarCliente(id);
-      return res.json("Cliente deletado com sucesso!");
+      return res.status(200).json({ message: "Cliente deletado com sucesso!" });
     } catch (e) {
-      return res.status(404).json({ error: "Cliente não encontrado" });
+      return res.status(500).json({ error: "Cliente não encontrado" });
     } finally {
       next();
     }

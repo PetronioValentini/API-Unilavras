@@ -4,7 +4,7 @@ class ProdutoController {
   async store(req, res) {
     try {
       const novoProduto = await ProdutoService.criarProduto(req.body);
-      return res.json(novoProduto);
+      return res.status(201).json(novoProduto);
     } catch (e) {
       const errors = e.message.split("\n");
       return res.status(400).json({ errors });
@@ -36,8 +36,11 @@ class ProdutoController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const produtoAtualizado = await ProdutoService.atualizarProduto(id, req.body);
-      return res.json(produtoAtualizado);
+      const produtoAtualizado = await ProdutoService.atualizarProduto(
+        id,
+        req.body,
+      );
+      return res.status(404).json(produtoAtualizado);
     } catch (error) {
       return res.status(400).json({ errors: error.message });
     }
@@ -47,7 +50,7 @@ class ProdutoController {
     try {
       const { id } = req.params;
       await ProdutoService.deletarProduto(id);
-      return res.json("Produto deletado com sucesso!");
+      return res.status(200).json({ message: "Produto deletado com sucesso!" });
     } catch (error) {
       return res.status(500).json({ error: "Produto não encontrado" });
     }
