@@ -38,9 +38,6 @@ class ProdutoController {
     try {
       const { id } = req.params;
       const produto = await ProdutoService.atualizarProduto(id, req.body);
-      if (!produto) {
-        return res.status(404).json({ error: "Produto não encontrado" });
-      }
       return res.json(produto);
     } catch (e) {
       return res.status(400).json({
