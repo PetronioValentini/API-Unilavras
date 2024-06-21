@@ -33,16 +33,19 @@ class ProdutoController {
     }
   }
 
+  // UPDATE
   async update(req, res) {
     try {
       const { id } = req.params;
-      const produtoAtualizado = await ProdutoService.atualizarProduto(
-        id,
-        req.body,
-      );
-      return res.status(404).json(produtoAtualizado);
-    } catch (error) {
-      return res.status(400).json({ errors: error.message });
+      const produto = await ProdutoService.atualizarProduto(id, req.body);
+      if (!produto) {
+        return res.status(404).json({ error: "Produto não encontrado" });
+      }
+      return res.json(produto);
+    } catch (e) {
+      return res.status(400).json({
+        errors: e.message,
+      });
     }
   }
 
