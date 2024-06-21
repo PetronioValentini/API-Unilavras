@@ -56,7 +56,7 @@ describe("Testando rotas de clientes", () => {
 
   it("Deve retornar status 200 ao fazer GET em /clientes/:id", async () => {
     const response = await request(app)
-      .get("/clientes/1")
+      .get("/clientes/3")
       .set("Authorization", `Bearer ${authToken}`);
     expect(response.status).toBe(200);
   });
